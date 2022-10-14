@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221006115916 extends AbstractMigration
+final class Version20221014000001 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,7 +21,7 @@ final class Version20221006115916 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE post (id INT AUTO_INCREMENT NOT NULL, id_profil_id INT NOT NULL, image_name VARCHAR(255) NOT NULL, updated_at DATETIME NOT NULL, title VARCHAR(255) NOT NULL, content LONGTEXT NOT NULL, created_at DATETIME NOT NULL, INDEX IDX_5A8A6C8DA76B6C5F (id_profil_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE post_comment (id INT AUTO_INCREMENT NOT NULL, id_profil_id INT NOT NULL, id_post_id INT NOT NULL, content LONGTEXT NOT NULL, INDEX IDX_A99CE55FA76B6C5F (id_profil_id), INDEX IDX_A99CE55F9514AA5C (id_post_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE post_comment (id INT AUTO_INCREMENT NOT NULL, id_profil_id INT NOT NULL, id_post_id INT NOT NULL, content LONGTEXT NOT NULL, created_at DATETIME NOT NULL, INDEX IDX_A99CE55FA76B6C5F (id_profil_id), INDEX IDX_A99CE55F9514AA5C (id_post_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE post_comment_like (id INT AUTO_INCREMENT NOT NULL, id_comment_id INT NOT NULL, id_profil_id INT NOT NULL, is_active TINYINT(1) NOT NULL, INDEX IDX_21689F8C5DE3FDC4 (id_comment_id), INDEX IDX_21689F8CA76B6C5F (id_profil_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE post_like (id INT AUTO_INCREMENT NOT NULL, id_profil_id INT NOT NULL, id_post_id INT NOT NULL, is_active TINYINT(1) NOT NULL, INDEX IDX_653627B8A76B6C5F (id_profil_id), INDEX IDX_653627B89514AA5C (id_post_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE profil (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, image_name VARCHAR(255) NOT NULL, updated_at DATETIME NOT NULL, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, address VARCHAR(255) DEFAULT NULL, zip_code VARCHAR(255) DEFAULT NULL, country VARCHAR(255) DEFAULT NULL, status VARCHAR(255) DEFAULT NULL, siret VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_E6D6B297A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');

@@ -94,6 +94,7 @@ class AppFixtures extends Fixture
                     $postComment = new PostComment();
                     $postComment->setContent($this->faker->paragraph)
                         ->setIdProfil($profilUnique)
+                        ->setCreatedAt($this->faker->dateTimeBetween('-6 months'))
                         ->setIdPost($postUnique);
 
                     $manager->persist($postComment);

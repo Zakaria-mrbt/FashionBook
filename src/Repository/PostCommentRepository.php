@@ -16,6 +16,18 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostCommentRepository extends ServiceEntityRepository
 {
+
+    public function findAll()
+    {
+        return $this->findBy(
+            array(),
+            array('createdAt' => 'ASC'),
+            
+            
+            
+    );
+    }
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, PostComment::class);

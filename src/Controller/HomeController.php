@@ -27,7 +27,7 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'posts' => $postRepository->findAll(),
-            'user' => $profilRepository->findByUserProfil(),
+            // 'user' => $profilRepository->findByUserProfil(),
             'comments' => $postCommentRepository->findAll(),
             'profil' => $profilRepository->findAll(),
             'postlikes' => $postLikeRepository->findAll(),
