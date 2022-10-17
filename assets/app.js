@@ -15,106 +15,48 @@ import './bootstrap';
 import 'tw-elements';
 
 
-// Carousell
-let defaultTransform = 0;
-function goNext() {
-  defaultTransform = defaultTransform - 182;
-  var slider = document.getElementById("slider");
-  if (Math.abs(defaultTransform) >= slider.scrollWidth / 1.9)
-    defaultTransform = 0;
-  slider.style.transform = "translateX(" + defaultTransform + "px)";
+// js carrousel :
+let defaultTransform_Accueil = 0;
+// fonction du boutton suivant
+function goNext_Accueil() {
+    defaultTransform_Accueil = defaultTransform_Accueil - 182;
+    var slider_accueil = document.getElementById("slider_Accueil");
+    // permet de définir une taille maximal ou la fonction peut agir
+    if (Math.abs(defaultTransform_Accueil) >= slider_accueil.scrollWidth / 1.9) defaultTransform_Accueil = 0;
+    slider_accueil.style.transform = "translateX(" + defaultTransform_Accueil + "px)";
 }
-next.addEventListener("click", goNext);
-function goPrev() {
-  var slider = document.getElementById("slider");
-  if (Math.abs(defaultTransform) === 0) defaultTransform = 0;
-  else defaultTransform = defaultTransform + 182;
-  slider.style.transform = "translateX(" + defaultTransform + "px)";
+// ajout de l'evenement clique a la fonction du bouton suivant
+next.addEventListener("click", goNext_Accueil);
+// fonction du boutton precedent
+function goPrev_Accueil() {
+    var slider_accueil = document.getElementById("slider_Accueil");
+    if (Math.abs(defaultTransform_Accueil) === 0) defaultTransform_Accueil = 0;
+    else defaultTransform_Accueil = defaultTransform_Accueil + 182;
+    slider_accueil.style.transform = "translateX(" + defaultTransform_Accueil + "px)";
 }
-prev.addEventListener("click", goPrev);
+// ajout de l'evenement clique a la fonction du bouton precedent
+prev.addEventListener("click", goPrev_Accueil);
 
-// carrousel album
-const items = [
-    {
-        position: 0,
-        el: document.getElementById('carousel-item-1')
-    },
-    {
-        position: 1,
-        el: document.getElementById('carousel-item-2')
-    },
-    {
-        position: 2,
-        el: document.getElementById('carousel-item-3')
-    },
-    {
-        position: 3,
-        el: document.getElementById('carousel-item-4')
-    },
-];
-
-const options = {
-    activeItemPosition: 1,
-    interval: 3000,
-
-    indicators: {
-        activeClasses: 'bg-white dark:bg-gray-800',
-        inactiveClasses: 'bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800',
-        items: [
-            {
-                position: 0,
-                el: document.getElementById('carousel-indicator-1')
-            },
-            {
-                position: 1,
-                el: document.getElementById('carousel-indicator-2')
-            },
-            {
-                position: 2,
-                el: document.getElementById('carousel-indicator-3')
-            },
-            {
-                position: 3,
-                el: document.getElementById('carousel-indicator-4')
-            },
-        ]
-    },
-    // callback functions
-    onNext: () => {
-        console.log('next slider item is shown');
-    },
-    onPrev: () => {
-        console.log('previous slider item is shown');
-    },
-    onChange: () => {
-        console.log('new slider item has been shown');
-    }
-};
-
-const carousel = new Carousel(items, options);
-
-// goes to the next (right) slide
-carousel.next()
-
-// goes to the previous (left) slide
-carousel.prev()
-
-// jumps to the 3rd position (position starts from 0)
-carousel.slideTo(2)
-
-// starts or resumes the carousel cycling (automated sliding)
-carousel.cycle()
-
-// pauses the cycling (automated sliding)
-carousel.pause()
-
-const prevButton = document.getElementById('data-carousel-prev');
-const nextButton = document.getElementById('data-carousel-next');
-
-prevButton.addEventListener('click', () => {
-    carousel.prev();
-});
-
-nextButton.addEventListener('click', () => {
-    carousel.next();
-});
+// js Carousell profil
+let defaultTransform_Profil = 0;
+// fonction du boutton suivant
+function goNext_Profil() {
+    // plus le chiffre est négatif + le carrousel deplaceras les elements vers la droite
+    defaultTransform_Profil = defaultTransform_Profil - 1012;
+    var slider_Profil = document.getElementById("slider_Profil");
+    // permet de définir une taille maximal ou la fonction peut agir
+    if (Math.abs(defaultTransform_Profil) >= slider_Profil.scrollWidth / 1.2) defaultTransform_Profil = 0;
+    slider_Profil.style.transform = "translateX(" + defaultTransform_Profil + "px)";
+}
+// ajout de l'evenement clique a la fonction du bouton suivant
+next.addEventListener("click", goNext_Profil);
+// fonction du boutton precedent
+function goPrev_Profil() {
+    var slider_Profil = document.getElementById("slider_Profil");
+    if (Math.abs(defaultTransform_Profil) === 0) defaultTransform_Profil = 0;
+    // plus le chiffre est négatif + le carrousel deplaceras les elements vers la gauche
+    else defaultTransform_Profil = defaultTransform_Profil + 1012;
+    slider_Profil.style.transform = "translateX(" + defaultTransform_Profil + "px)";
+}
+// ajout de l'evenement clique a la fonction du bouton precedent
+prev.addEventListener("click", goPrev_Profil); 

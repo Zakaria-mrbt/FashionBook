@@ -20,8 +20,7 @@ class HomeController extends AbstractController
                           ): Response
     {
         
-        $test = $postLikeRepository ;
-        $test = $postLikeRepository->findAll();
+
         
         
 
