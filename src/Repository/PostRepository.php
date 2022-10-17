@@ -65,23 +65,23 @@ class PostRepository extends ServiceEntityRepository
 //    }
 
 
-public function findByallPublication() {
+// public function findByallPublication() {
     
    
-    return $this->createQueryBuilder('publicationpost')
-    ->select('post.id, post.content, post_comment.content')
-    ->from('App\Entity\Post', 'post')
-    ->from('App\Entity\PostComment', 'post_comment')
+//     return $this->createQueryBuilder('publicationpost')
+//     ->select('post.id, post.content, post_comment.content')
+//     ->from('App\Entity\Post', 'post')
+//     ->from('App\Entity\PostComment', 'post_comment')
     
-    ->where('post.id = 7 ') 
-    ->setMaxResults(15)
-    // ->andWhere('post.id = post_comment.id')
+//     ->where('post.id = 7 ') 
+//     ->setMaxResults(15)
+//     // ->andWhere('post.id = post_comment.id')
     
     
-    // ->setParameter('p','Post')
-    ->getQuery()
-    ->getResult()
-;
+//     // ->setParameter('p','Post')
+//     ->getQuery()
+//     ->getResult()
+// ;
 
 
     // return $this->createQueryBuilder('Post')
@@ -97,7 +97,7 @@ public function findByallPublication() {
         // ->getQuery()
         // ->getResult()
         
-    ;
+    // ;
 
     // return $this->createQuery(
     //     'SELECT * FROM post , post_comment WHERE '
@@ -106,7 +106,19 @@ public function findByallPublication() {
     //     ->getResult()
     //     ;
 
+// }
 
 
-}
+
+    public function findByAllPublication(): array
+    {
+        return $this->createQueryBuilder('post')
+            
+            
+            ->orderBy('post.createdAt', 'ASC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

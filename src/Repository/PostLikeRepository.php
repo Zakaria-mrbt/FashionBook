@@ -41,12 +41,26 @@ class PostLikeRepository extends ServiceEntityRepository
 
 
 
+   /**
+    * @return PostLike[] Returns an array of PostLike objects
+    */
 
 
 
-//    /**
-//     * @return PostLike[] Returns an array of PostLike objects
-//     */
+    public function findSomePostLike(): array
+    {
+        return $this->createQueryBuilder('pl')
+            ->select('SUM(pl.isActive)')
+            ->where('pl.idpost')
+            
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+
+
+
 //    public function findByExampleField($value): array
 //    {
 //        return $this->createQueryBuilder('p')

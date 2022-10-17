@@ -75,6 +75,9 @@ class Profil
     #[ORM\OneToMany(mappedBy: 'idProfil', targetEntity: StoryLike::class, orphanRemoval: true)]
     private Collection $storyLikes;
 
+    #[ORM\Column]
+    private ?bool $isActive = null;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -457,5 +460,25 @@ class Profil
         }
 
         return $this;
+    }
+
+    public function isIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of isActive
+     */ 
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 }

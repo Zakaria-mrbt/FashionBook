@@ -19,9 +19,6 @@ class PostComment
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
-
     #[ORM\ManyToOne(inversedBy: 'postComments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Profil $idProfil = null;
@@ -33,6 +30,8 @@ class PostComment
     #[ORM\OneToMany(mappedBy: 'idComment', targetEntity: PostCommentLike::class, orphanRemoval: true)]
     private Collection $postCommentLikes;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $createdAt = null;
 
     public function __construct()
     {
@@ -52,18 +51,6 @@ class PostComment
     public function setContent(string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-    
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -118,6 +105,18 @@ class PostComment
                 $postCommentLike->setIdComment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

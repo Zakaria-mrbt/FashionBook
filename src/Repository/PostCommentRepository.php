@@ -110,32 +110,44 @@ class PostCommentRepository extends ServiceEntityRepository
 
 
 
-public function findByPostCommentByPostId() {
+// public function findByPostCommentByPostId() {
     
    
     
 
-    return $this->createQueryBuilder('postcomment')
-        // ->select('*')
-        ->from('App\Entity\PostComment', 'post_comment')
-        ->join('App\Entity\Post', 'post')
-        ->where('postcomment.idPost = post.id') 
-        ->setMaxResults(5)
-        // ->andWhere('post.id = post.id')
+//     return $this->createQueryBuilder('postcomment')
+//         // ->select('*')
+//         ->from('App\Entity\PostComment', 'post_comment')
+//         ->join('App\Entity\Post', 'post')
+//         ->where('postcomment.idPost = post.id') 
+//         ->setMaxResults(5)
+//         // ->andWhere('post.id = post.id')
         
         
-        // ->setParameter('p','Post')
-        ->getQuery()
-        ->getResult()
-    ;
+//         // ->setParameter('p','Post')
+//         ->getQuery()
+//         ->getResult()
+//     ;
 
     // return $this->createQuery(
     //     'SELECT * FROM post , post_comment WHERE '
     //  )   
     //     ->getQuery()
     //     ->getResult()
-    //     ;
-}
+//     //     ;
+// }
 
+
+    public function findByAllPublicationComment(): array
+    {
+        return $this->createQueryBuilder('comment')
+            
+            
+            ->orderBy('comment.createdAt', 'ASC')       
+            ->setMaxResults(200)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
 

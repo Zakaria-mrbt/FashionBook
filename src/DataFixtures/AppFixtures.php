@@ -28,54 +28,60 @@ class AppFixtures extends Fixture
     }
     public function load(ObjectManager $manager): void
     {
-        ini_set("memory_limit", "1024M");
-        for ($i = 0; $i <= 5; $i++) {
-            $arr = array("Particuliers" => "Particuliers", "Formateur" => "Formateur", "Entreprise" => "Entreprise", "Autre organisation" => "Autre organisation");
+        ini_set("memory_limit", "1024M"); 
+        for($i = 0; $i <= 5; $i++){
+            $arr = array( "Particuliers" => "Particuliers", "Formateur" => "Formateur", "Entreprise" => "Entreprise", "Autre organisation" => "Autre organisation" );
             $user = new User();
             $user->setEmail($this->faker->email)
-                ->setPassword($this->userPasswordHasher->hashPassword($user, 'azerty'))
-                ->setName($this->faker->lastName)
-                ->setFirstName($this->faker->firstName)
-                ->setIsVerified(1)
-                ->setStatus(array_rand($arr));
+            ->setPassword($this->userPasswordHasher->hashPassword($user, 'azerty'))
+            ->setName($this->faker->lastName)
+            ->setFirstName($this->faker->firstName)
+            ->setIsVerified(1)
+            ->setStatus(array_rand($arr));
             $manager->persist($user);
         }
         $manager->flush();
         $users = $manager->getRepository(User::class)->findAll();
-        foreach ($users as $user) {
+        foreach($users as $user){
             $profil = new Profil();
             $profil->setUser($user)
-                ->setFirstname($user->getName())
-                ->setLastname($user->getFirstName())
-                ->setUpdatedAt(new \DateTimeImmutable())
-                ->setAddress($this->faker->address)
-                ->setZipCode($this->faker->postcode)
-                ->setCountry($this->faker->country)
-                ->setStatus($user->getStatus())
-                ->setSiret($this->faker->creditcardnumber)
-                ->setImageName('web-search-vector-icon-png-253149-6331a52e33534282542452.jpeg');
-            $manager->persist($profil);
+            ->setFirstname($user->getName())
+            ->setLastname($user->getFirstName())
+            ->setUpdatedAt(new \DateTimeImmutable())
+            ->setAddress($this->faker->address)
+            ->setZipCode($this->faker->postcode)
+            ->setCountry($this->faker->country)
+            ->setStatus($user->getStatus())
+            ->setSiret($this->faker->siret)
+                ->setIsActive(1)
+                ->setImageName('web-search-vector-icon-png-253149-6331a52e33534282542452.jpeg')
+
+        ;
+        $manager->persist($profil);
         }
         $manager->flush();
 
         $profils = $manager->getRepository(Profil::class)->findAll();
-        for ($i = 0; $i <= 10; $i++) {
-            foreach ($profils as $profilUnique) {
+
+        for($i = 0; $i <= 5; $i++){
+            $arrImage = array("pexel1.jpg" => "pexel1.jpg", "pexel2.jpg" => "pexel2.jpg", "pexel3.jpg" => "pexel3
+            .jpg", "pexel4.jpg" => "pexel4.jpg", "pexel5.jpg" => "pexel5.jpg", "pexel6.jpg" => "pexel6.jpg", "pexel7.jpg" => "pexel7.jpg", "pexel8.jpg" => "pexel8.jpg", "pexel9.jpg" => "pexel9.jpg", "pexel10.jpg" => "pexel10.jpg");
+            foreach($profils as $profilUnique){
                 $post = new Post();
                 $post->setIdProfil($profilUnique)
-                    ->setTitle($this->faker->sentence(4))
-                    ->setContent($this->faker->paragraph)
-                    ->setCreatedAt($this->faker->dateTimeBetween('-6 months'))
-                    ->setUpdatedAt(new \DateTimeImmutable())
-                    ->setImageName('postArticle.jpeg');
+                ->setTitle($this->faker->sentence(4))
+                ->setContent($this->faker->paragraph)
+                ->setCreatedAt($this->faker->dateTimeBetween('-6 months'))
+                ->setUpdatedAt(new \DateTimeImmutable())
+                ->setImageName(array_rand($arrImage));
                 $manager->persist($post);
             }
         }
         $manager->flush();
 
         $posts = $manager->getRepository(Post::class)->findAll();
-        for ($i = 1; $i <= 5; $i++) {
-            foreach ($profils as $profilUnique) {
+        for ($i = 0; $i <= 5; $i++) {
+            foreach($profils as $profilUnique){
                 foreach ($posts as $postUnique) {
                     $postlike = new PostLike();
                     $postlike->setIdProfil($profilUnique)
@@ -88,14 +94,14 @@ class AppFixtures extends Fixture
 
         $manager->flush();
 
-        for ($i = 1; $i <= 10; $i++) {
-            foreach ($profils as $profilUnique) {
+        for ($i = 0; $i <= 2; $i++) {
+            foreach($profils as $profilUnique){
                 foreach ($posts as $postUnique) {
                     $postComment = new PostComment();
                     $postComment->setContent($this->faker->paragraph)
-                        ->setIdProfil($profilUnique)
-                        ->setCreatedAt($this->faker->dateTimeBetween('-6 months'))
-                        ->setIdPost($postUnique);
+                    ->setIdProfil($profilUnique)
+                    ->setIdPost($postUnique)
+                    ->setCreatedAt($this->faker->dateTime);
 
                     $manager->persist($postComment);
                 }
@@ -104,36 +110,36 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         $comments = $manager->getRepository(PostComment::class)->findAll();
-        for ($i = 1; $i <= 5; $i++) {
-            foreach ($profils as $profilUnique) {
+        for ($i = 0; $i <= 5; $i++) {
+            foreach($profils as $profilUnique){
                 foreach ($comments as $comment) {
                     $postCommentLike = new PostCommentLike();
                     $postCommentLike->setIsActive(1)
-                        ->setIdProfil($profilUnique)
-                        ->setIdComment($comment);
+                    ->setIdProfil($profilUnique)
+                    ->setIdComment($comment);
                     $manager->persist($postCommentLike);
                 }
             }
         }
         $manager->flush();
 
-        for ($i = 0; $i <= 10; $i++) {
-            foreach ($profils as $profilUnique) {
+        for($i = 0; $i <= 10; $i++){
+            foreach($profils as $profilUnique){
                 $story = new Story();
                 $story->setIdProfil($profilUnique)
-                    ->setTitle($this->faker->sentence(4))
-                    ->setContent($this->faker->sentence(4))
-                    ->setIsActive(1)
-                    ->setUpdatedAt(new \DateTimeImmutable())
-                    ->setImageName('postArticle.jpeg');
+                ->setTitle($this->faker->sentence(4))
+                ->setContent($this->faker->sentence(4))
+                ->setIsActive(1)
+                ->setUpdatedAt(new \DateTimeImmutable())
+                ->setImageName('postArticle.jpeg');
                 $manager->persist($story);
             }
         }
         $manager->flush();
 
         $stories = $manager->getRepository(Story::class)->findAll();
-        for ($i = 1; $i <= 5; $i++) {
-            foreach ($profils as $profilUnique) {
+        for ($i = 0; $i <= 5; $i++) {
+            foreach($profils as $profilUnique){
                 foreach ($stories as $storyUnique) {
                     $storylike = new StoryLike();
                     $storylike->setIdProfil($profilUnique)

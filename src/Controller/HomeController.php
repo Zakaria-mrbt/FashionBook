@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 
+use App\Entity\Post;
 use App\Repository\PostCommentRepository;
+use App\Repository\PostLikeRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,23 +19,40 @@ class HomeController extends AbstractController
                           \App\Repository\ProfilRepository $profilRepository,
                           \App\Repository\PostLikeRepository $postLikeRepository,
                           \App\Repository\PostCommentRepository $postCommentLikeRepository,
-                          ): Response
+                           ): Response
     {
         
 
+        // $testpost = $postRepository->findByAllPublication();
+
+        // dd($testpost);
+
+        // $testcomment = $postRepository->findByAllPublication();
+
+        // dd($testcomment);
+        
+        //    $testlike = $postLikeRepository->findSomePostLike();
+
+        // dd($testlike);
         
         
 
         return $this->render('home/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'posts' => $postRepository->findByAllPublication(),
             // 'user' => $profilRepository->findByUserProfil(),
-            'comments' => $postCommentRepository->findAll(),
+            'comments' => $postCommentRepository->findByAllPublicationComment(),
             'profil' => $profilRepository->findAll(),
-            'postlikes' => $postLikeRepository->findAll(),
+            'postLikes' => $postLikeRepository->findSomePostLike(),
             'postcommentlikes' => $postCommentLikeRepository->findAll(),
+            
 
 
         ]);
        
     }
+
+
+
 }
+
+

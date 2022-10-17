@@ -64,4 +64,5 @@ class PostLike
 
         return $this;
     }
+
 }
