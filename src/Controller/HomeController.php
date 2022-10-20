@@ -18,7 +18,7 @@ class HomeController extends AbstractController
                           \App\Repository\PostCommentRepository $postCommentRepository,
                           \App\Repository\ProfilRepository $profilRepository,
                           \App\Repository\PostLikeRepository $postLikeRepository,
-                          \App\Repository\PostCommentRepository $postCommentLikeRepository,
+                          \App\Repository\PostCommentLikeRepository $PostCommentLikeRepository,
                            ): Response
     {
         
@@ -31,7 +31,7 @@ class HomeController extends AbstractController
 
         // dd($testcomment);
         
-        //    $testlike = $postLikeRepository->findSomePostLike();
+        //    $testlike = $PostCommentLikeRepository->findAll();
 
         // dd($testlike);
         
@@ -42,8 +42,8 @@ class HomeController extends AbstractController
             // 'user' => $profilRepository->findByUserProfil(),
             'comments' => $postCommentRepository->findByAllPublicationComment(),
             'profil' => $profilRepository->findAll(),
-            'postLikes' => $postLikeRepository->findSomePostLike(),
-            'postcommentlikes' => $postCommentLikeRepository->findAll(),
+            'postLikes' => $postLikeRepository->findAll(),
+            'postCommentsLikes' => $PostCommentLikeRepository->findAll()
             
 
 
