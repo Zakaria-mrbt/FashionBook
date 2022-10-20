@@ -86,7 +86,7 @@ class AppFixtures extends Fixture
                     $postlike = new PostLike();
                     $postlike->setIdProfil($profilUnique)
                         ->setIdPost($postUnique)
-                        ->setIsActive(1);
+                        ->setIsActive(rand(0,1));
                     $manager->persist($postlike);
                 }
             }
@@ -114,7 +114,7 @@ class AppFixtures extends Fixture
             foreach($profils as $profilUnique){
                 foreach ($comments as $comment) {
                     $postCommentLike = new PostCommentLike();
-                    $postCommentLike->setIsActive(1)
+                    $postCommentLike->setIsActive(rand(0, 1))
                     ->setIdProfil($profilUnique)
                     ->setIdComment($comment);
                     $manager->persist($postCommentLike);
